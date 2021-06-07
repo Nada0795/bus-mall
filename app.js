@@ -1,6 +1,6 @@
 'use strict';
 
-
+let container = document.getElementById('container');
 let leftImage = document.getElementById('left-image');
 let middleImage = document.getElementById('middle-image');
 let rightImage = document.getElementById('right-image');
@@ -25,49 +25,48 @@ function Busmall(name, path) {
 Busmall.allBus=[];
 
 
-new Busmall('bag', 'bag.jpg'); //[0]
+new Busmall('bag', 'img/bag.jpg'); //[0]
 
-new Busmall('banana', 'banana.jpg'); //[1]
+new Busmall('banana', 'img/banana.jpg'); //[1]
 
-new Busmall('bathroom', 'bathroom.jpg'); //[2]
+new Busmall('bathroom', 'img/bathroom.jpg'); //[2]
 
-new Busmall('boots', 'boots.jpg'); //[3]
+new Busmall('boots', 'img/boots.jpg'); //[3]
 
-new Busmall('breakfast', 'breakfast.jpg'); //[4]
+new Busmall('breakfast', 'img/breakfast.jpg'); //[4]
 
-new Busmall('bubblegum', 'bubblegum.jpg'); //[5]
+new Busmall('bubblegum', 'img/bubblegum.jpg'); //[5]
 
-new Busmall('chair', 'chair.jpg'); //[6]
+new Busmall('chair', 'img/chair.jpg'); //[6]
 
-new Busmall('cthulhu', 'cthulhu.jpg'); //[7]
+new Busmall('cthulhu', 'img/cthulhu.jpg'); //[7]
 
-new Busmall('dog-duck', 'dog-duck.jpg'); //[8]
+new Busmall('dog-duck', 'img/dog-duck.jpg'); //[8]
 
-new Busmall('dragon', 'dragon.jpg'); //[9]
+new Busmall('dragon', 'img/dragon.jpg'); //[9]
 
-new Busmall('pen', 'pen.jpg'); //[10]
+new Busmall('pen', 'img/pen.jpg'); //[10]
 
-new Busmall('pet-sweep', 'pet-sweep.jpg'); //[11]
+new Busmall('pet-sweep', 'img/pet-sweep.jpg'); //[11]
 
-new Busmall('scissors', 'scissors.jpg'); //[12]
+new Busmall('scissors', 'img/scissors.jpg'); //[12]
 
-new Busmall('shark', 'shark.jpg'); //[13]
+new Busmall('shark', 'img/shark.jpg'); //[13]
 
-new Busmall('sweep', 'sweep.png'); //[14]
+new Busmall('sweep', 'img/sweep.png'); //[14]
 
-new Busmall('tauntaun', 'tauntaun.jpg'); //[15]
+new Busmall('tauntaun', 'img/tauntaun.jpg'); //[15]
 
-new Busmall('unicorn', 'unicorn.jpg'); //[16]
+new Busmall('unicorn', 'img/unicorn.jpg'); //[16]
 
-new Busmall('usb', 'usb.gif'); //[17]
+new Busmall('usb', 'img/usb.gif'); //[17]
 
-new Busmall('water-can', 'water-can.jpg'); //[18]
+new Busmall('water-can', 'img/water-can.jpg'); //[18]
 
-new Busmall('wine-glass', 'wine-glass.jpg'); //[19]
+new Busmall('wine-glass', 'img/wine-glass.jpg'); //[19]
 
 
 function displayThreeImages(){
-
 
     leftIndex=generateRandomIndex();
     middleIndex=generateRandomIndex();
@@ -78,15 +77,20 @@ while(leftIndex===rightIndex || leftIndex===middleIndex || rightIndex===middleIn
 
    leftIndex=generateRandomIndex();
    middleIndex=generateRandomIndex();
-   rightIndex=generateRandomIndex();
+//    rightIndex=generateRandomIndex();
 
 }
 
 
-leftImage.src=Busmall.allBus[leftIndex].path
-middleImage.src=Busmall.allBus[middleIndex].path
-rightImage.src=Busmall.allBus[rightIndex].path
+leftImage.setAttribute('src',Busmall.allBus[leftIndex].path);
+Busmall.allBus[leftIndex].shown++;
+middleImage.setAttribute('src',Busmall.allBus[middleIndex].path);
+Busmall.allBus[middleIndex].shown++;
 
+rightImage.setAttribute('src',Busmall.allBus[rightIndex].path);
+Busmall.allBus[rightIndex].shown++;
+
+// Busmall.allBus[leftIndex].path
 }
 displayThreeImages();
 
@@ -95,7 +99,7 @@ displayThreeImages();
 // Busmall.all = [];
 
 function generateRandomIndex() {
-    let randomIndex = math.floor(math.random() * Busmall.allBus.length);
+    let randomIndex = Math.floor(Math.random() * Busmall.allBus.length);
     return randomIndex;
 
 }
@@ -108,8 +112,10 @@ leftImage.addEventListener('click',handleClicking);
 middleImage.addEventListener('click',handleClicking);
 rightImage.addEventListener('click',handleClicking);
 
+container.addEventListener('click',handleClicking);
+let btnEl;
 function handleClicking(event){
-    ountClick++;
+    countClick++;
     console.log(event.target.id);
 
     if (rounds >= countClick ){
@@ -128,17 +134,29 @@ else if (event.target.id==='right-image'){
     Busmall.allBus[rightImage].votes++;  
 
 }
+else {
+    return;
+}
+
 
 displayThreeImages();
     }
 
     else {
         console.log(Busmall.allBus);
+btnEl = document.getElementById('btn');
+btnEl.addEventListener('click',handleShowing); 
 
+container.removeEventListener('click',handleClicking);
     }
 
 }
 
+function handleShowing(){
+
+    gettingList();
+    btnEl.removeEventListener('click',handleShowing); 
+}
 
 function gettingList(){
 let ul = document.getElementById('unList');
