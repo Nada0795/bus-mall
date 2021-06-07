@@ -1,0 +1,51 @@
+body{
+
+    box-sizing: border-box;
+    background-color: #e4bad4;
+}
+
+
+h1{
+    text-align: center;
+    color: #99154e;
+}
+
+#sec-one{
+float: left;
+width: 50%;
+
+}
+
+#sec-two{
+    float: right;
+    width: 50%;
+    
+    }
+
+    img{
+
+        display: inline-block;
+        width: 40%;
+        height: 300px;
+    }
+
+
+
+    ul{
+width: 80%;
+background-color: #fff5ab;
+
+    }
+
+    li{
+font-size: 30px;
+font-weight: bold;
+list-style: none;
+color: #f5abc9;
+
+    }
+
+    button{
+color:#99154e ;
+background-color:#b6c9f0;
+    }
