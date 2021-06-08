@@ -7,6 +7,8 @@ let rightImage = document.getElementById('right-image');
 
 let rounds = 25;
 let countClick = 0;
+let arrOfNames = [];
+let arrOfVotes =[];
 
 let leftIndex;
 let middleIndex;
@@ -19,7 +21,7 @@ function Busmall(name, path) {
     this.votes = 0;
     this.shown = 0;
     Busmall.allBus.push(this);
-   
+   arrOfNames.push(this.name);
 }
 
 Busmall.allBus=[];
@@ -155,12 +157,16 @@ container.removeEventListener('click',handleClicking);
 function handleShowing(){
 
     gettingList();
+    gettingChart();
     btnEl.removeEventListener('click',handleShowing); 
 }
 
+let arrOfShown = [];
 function gettingList(){
 let ul = document.getElementById('unList');
 for(let i = 0 ; i <Busmall.allBus.length; i++ ){
+    arrOfVotes.push(Busmall.allBus[i].votes);
+   arrOfShown.push(Busmall.allBus[i].shown)
     let li = document.createElement('li');
     ul.appendChild(li);
     li.textContent = `${Busmall.allBus[i].name} has ${Busmall.allBus[i].votes} Votes`;
@@ -168,4 +174,47 @@ for(let i = 0 ; i <Busmall.allBus.length; i++ ){
 }
 }
 
+function gettingChart(){
+
+let ctx = document.getElementById('myChart').getContext('2d');
+let myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: arrOfNames,
+        datasets: [{
+            label: '# of Votes',
+            data: arrOfVotes,
+            backgroundColor: [
+                'rgb(242, 17, 112)',
+                'rgb(242, 17, 112)',
+                'rgb(242, 17, 112)',
+                'rgb(242, 17, 112)',
+                'rgb(242, 17, 112)',
+                'rgb(242, 17, 112)',
+            ],
+        
+            borderWidth: 1
+        },
+{
+        label: '# of Votes',
+        data: arrOfShown,
+        backgroundColor: [
+            'rgb(114, 20, 126)',
+            'rgb(114, 20, 126)',
+            'rgb(114, 20, 126)',
+            'rgb(114, 20, 126)',
+            'rgb(114, 20, 126)',
+            'rgb(114, 20, 126)'
+        ],
+    
+        borderWidth: 1
+    }
+    ]
+
+
+
+    },
+
+});
+}
 // THEEND
