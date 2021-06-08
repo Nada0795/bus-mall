@@ -23,7 +23,6 @@ function Busmall(name, path) {
     Busmall.allBus.push(this);
    arrOfNames.push(this.name);
 
-   saveData();
 }
 
 Busmall.allBus=[];
@@ -156,16 +155,8 @@ container.removeEventListener('click',handleClicking);
 
 }
 
-function saveData{
-    localStorage.setItem('Busmall',Jason.stringify(allBus.length));
-}
 
-function gettingOrderFromls(){
-let data = localStorage.getItem('Busmall');
-// console.log(data);
-let allBus = Json.parse(data);
 
-}
 
 function handleShowing(){
 
