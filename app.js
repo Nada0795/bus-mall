@@ -22,6 +22,7 @@ function Busmall(name, path) {
     this.shown = 0;
     Busmall.allBus.push(this);
    arrOfNames.push(this.name);
+
 }
 
 Busmall.allBus=[];
@@ -153,6 +154,9 @@ container.removeEventListener('click',handleClicking);
     }
 
 }
+
+
+
 
 function handleShowing(){
 
