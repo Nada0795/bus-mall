@@ -14,6 +14,8 @@ let leftIndex;
 let middleIndex;
 let rightIndex;
 
+let noRepeat=[];
+
 
 function Busmall(name, path) {
     this.name = name;
@@ -76,13 +78,16 @@ function displayThreeImages(){
     rightIndex=generateRandomIndex();
 
 
-while(leftIndex===rightIndex || leftIndex===middleIndex || rightIndex===middleIndex){
+while(leftIndex===rightIndex || leftIndex===middleIndex || rightIndex===middleIndex || noRepeat.includes(leftIndex) 
+|| noRepeat.includes(middleIndex) || noRepeat.includes(rightIndex)){
 
    leftIndex=generateRandomIndex();
    middleIndex=generateRandomIndex();
-//    rightIndex=generateRandomIndex();
+   rightIndex=generateRandomIndex();
 
 }
+
+noRepeat=[leftIndex,middleIndex,rightIndex];
 
 
 leftImage.setAttribute('src',Busmall.allBus[leftIndex].path);
@@ -134,7 +139,7 @@ else if (event.target.id==='middle-image'){
 }
 
 else if (event.target.id==='right-image'){
-    Busmall.allBus[rightImage].votes++;  
+    Busmall.allBus[rightIndex].votes++;  
 
 }
 else {
@@ -151,6 +156,8 @@ btnEl = document.getElementById('btn');
 btnEl.addEventListener('click',handleShowing); 
 
 container.removeEventListener('click',handleClicking);
+
+createLocalStorage();
     }
 
 }
@@ -221,4 +228,26 @@ let myChart = new Chart(ctx, {
 
 });
 }
-// THEEND
+// =======================================lab 13 local storage===================================
+
+
+
+function createLocalStorage(){
+
+    let convertS= JSON.stringify(Busmall.allBus);
+   // console.log(convertS);
+     localStorage.setItem('myProducts', convertS);
+
+}
+
+function getTotal(){
+
+ let getProd =localStorage.getItem('myProducts');
+  let returnO= JSON.parse(getProd);
+
+  if (returnO != null){
+  Busmall.allBus=returnO;
+  }
+}
+
+getTotal();
