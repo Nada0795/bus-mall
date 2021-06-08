@@ -29,6 +29,7 @@ width: 50%;
         width: 40%;
         height: 150px;
         margin: 40px;
+        border-style: double; color:black ;
     }
 
 

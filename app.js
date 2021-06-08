@@ -22,6 +22,8 @@ function Busmall(name, path) {
     this.shown = 0;
     Busmall.allBus.push(this);
    arrOfNames.push(this.name);
+
+   saveData();
 }
 
 Busmall.allBus=[];
@@ -151,6 +153,17 @@ btnEl.addEventListener('click',handleShowing);
 
 container.removeEventListener('click',handleClicking);
     }
+
+}
+
+function saveData{
+    localStorage.setItem('Busmall',Jason.stringify(allBus.length));
+}
+
+function gettingOrderFromls(){
+let data = localStorage.getItem('Busmall');
+// console.log(data);
+let allBus = Json.parse(data);
 
 }
 
